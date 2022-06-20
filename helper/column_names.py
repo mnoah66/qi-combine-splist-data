@@ -6,10 +6,10 @@ import logging
 
 def cleaned_consumer_columns():
 
-    client_id = os.getenv('client_id')
-    client_secret = os.getenv('client_secret')
+    client_id = os.getenv('clientId')
+    client_secret = os.getenv('clientSecret')
     tenant = os.getenv('tenant')
-    tenant_id = os.getenv('tenant_id')
+    tenant_id = os.getenv('tenantId')
     client_id = client_id + '@' + tenant_id
 
 

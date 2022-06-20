@@ -11,22 +11,13 @@ from helper import column_names
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
-    # Create CSV from combining dictionaries.
-    # data = [
-    #   header,row,with,keys,from,the,dictionaries,
-    #   all,the,values,from,the,dictionaries
-    # ]
-
-
     req_body = req.get_json()
 
     intro = req_body['intro']
-    
     consumer = req_body['consumer']
     eea = req_body['eea']    
     facility = req_body['facility']
     safety = req_body['safety']
-    logging.info(safety)
     fleet = req_body['fleet']
     support = req_body['support']
     documentation = req_body['documentation']
@@ -97,7 +88,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         except:
             pass       
 
-    data = [data]
+    data = [data] # put into a list as Power Automate expects a list of objects
     return func.HttpResponse(
              json.dumps(data),
              status_code=200
