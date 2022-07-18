@@ -34,6 +34,7 @@ def cleaned_consumer_columns():
         'Content-Type': 'application/json;odata=verbose'
     }
 
+    intro = requests.get("https://arcessex.sharepoint.com/sites/QualityImprovement/_api/web/lists/getbytitle('ResQuarterlyIntro')/Fields", headers=headers).json()
     consumer = requests.get("https://arcessex.sharepoint.com/sites/QualityImprovement/_api/web/lists/getbytitle('ResQuarterlyConsumer')/Fields", headers=headers).json()
     eea = requests.get("https://arcessex.sharepoint.com/sites/QualityImprovement/_api/web/lists/getbytitle('ResQuarterlyEEA')/Fields", headers=headers).json()
     facility = requests.get("https://arcessex.sharepoint.com/sites/QualityImprovement/_api/web/lists/getbytitle('ResQuarterlyFacility')/Fields", headers=headers).json()
@@ -44,6 +45,13 @@ def cleaned_consumer_columns():
     medical = requests.get("https://arcessex.sharepoint.com/sites/QualityImprovement/_api/web/lists/getbytitle('ResQuarterlyMedDocStorage')/Fields", headers=headers).json()
 
     lookup = {}
+
+    
+    intro_dict = {}
+    for item in intro['d']['results']:
+        if not item['FromBaseType']: # Ignore the auto generated columns
+            intro_dict[item['InternalName']] = item['Title']
+    lookup['intro_dict'] = intro_dict
 
     consumer_dict = {}
     for item in consumer['d']['results']:
